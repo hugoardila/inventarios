@@ -1,0 +1,17 @@
+services:
+  local-web:
+    build: .
+    container_name: local-web
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      LOCAL_DB_HOST: ${LOCAL_DB_HOST:?set in .env}
+      LOCAL_DB_NAME: ${LOCAL_DB_NAME:?set in .env}
+      LOCAL_DB_USER: ${LOCAL_DB_USER:?set in .env}
+      LOCAL_DB_PASS: ${LOCAL_DB_PASS:?set in .env}
+      LOCAL_APP_URL: https://tecnoxpert.com/local
+      LOCAL_BASE_URL: https://tecnoxpert.com/local/public/
+      LOCAL_MYSQLDUMP_BIN: mysqldump
+      TZ: America/Bogota
+    volumes:
+      - ./app:/var/www/html
